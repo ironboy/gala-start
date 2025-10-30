@@ -1,6 +1,8 @@
 import start from './pages/start.js';
 import aboutUs from './pages/about-us.js';
 import pets from './pages/pets.js';
+/* for a more old school approach to creating html from json*/
+/* import pets from './pages/petsOldSchool.js';*/
 import petOwners from './pages/petOwners.js';
 
 // Our menu: label to display in menu and 
