@@ -1,13 +1,15 @@
 import start from './pages/start.js';
 import aboutUs from './pages/about-us.js';
-import products from './pages/products.js';
+import pets from './pages/pets.js';
+import petOwners from './pages/petOwners.js';
 
 // Our menu: label to display in menu and 
 // function to run on menu choice
 const menu = {
   "start": { label: 'Start', function: start },
   "about-us": { label: 'About us', function: aboutUs },
-  "products": { label: 'Our products', function: products }
+  "pets": { label: 'Pets', function: pets },
+  "pet-owners": { label: 'Pet owners', function: petOwners }
 };
 
 function createMenu() {
@@ -21,13 +23,13 @@ function createMenu() {
     .join('');
 }
 
-function loadPageContent() {
+async function loadPageContent() {
   // if no hash redirect to #start
   if (location.hash === '') { location.replace('#start'); }
   // get the correct function to run depending on location.hash
   const functionToRun = menu[location.hash.slice(1)].function;
   // run the function and expect it return a html string
-  const html = functionToRun();
+  const html = await functionToRun();
   // replace the contents of the main element
   document.querySelector('main').innerHTML = html;
 }
