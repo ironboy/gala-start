@@ -24,6 +24,8 @@ function createMenu() {
 async function loadPageContent() {
   // if no hash redirect to #start
   if (location.hash === '') { location.replace('#start'); }
+  // add a class on body so that we can style differnt pages differently
+  document.body.setAttribute('class', location.hash.slice(1));
   // get the correct function to run depending on location.hash
   const functionToRun = menu[location.hash.slice(1)].function;
   // run the function and expect it return a html string
