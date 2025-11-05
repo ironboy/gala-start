@@ -19,18 +19,8 @@ async function submitForm(event) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, description }) // stringify = serialize
   });
-  // get all clubs
-  const allClubs = await (await fetch('http://localhost:3000/clubs')).json();
-  console.log(allClubs);
-  // show success and list of  all clubs
-  document.querySelector('main').innerHTML = `
-    <h1>Klubben skapades</h1>
-    <p>Nu finns följande klubbar:</p>
-    ${allClubs.toReversed().map(({ id, name, description }) => `
-      <h3>${name} (id: ${id})</h3>
-      <p>${description}</p>
-    `).join('')}
-  `;
+  // goto club-created page
+  location.hash = '#club-created';
 }
 
 // add event listener

@@ -2,17 +2,19 @@ import start from './pages/start.js';
 import jazzClub from './pages/jazz-club.js';
 import metalClub from './pages/metal-club.js';
 import createClub from './pages/create-club.js';
+import clubCreated from './pages/club-created.js';
 
 const isAdmin = true; // "resultat av en inloggning"
 
-// Our menu: label to display in menu and 
+// Our menu: label to display in menu and
 // function to run on menu choice
 const menu = {
   // urlHash
   "start": { label: 'Start', function: start },
   "jazz-klubben": { label: 'Jazz-klubben', function: jazzClub },
   "metal-klubben": { label: 'Metal-klubben', function: metalClub },
-  "create-club": { label: 'Skapa en klubb', function: createClub, isAdminPage: true }
+  "create-club": { label: 'Skapa en klubb', function: createClub, isAdminPage: true },
+  "club-created": { label: 'Skapa en klubb', function: clubCreated, isAdminPage: true, showInMenu: false }
 };
 
 function createMenu() {
@@ -20,13 +22,15 @@ function createMenu() {
   // then map to create a-tags (links)
   // then join everything into one big string
   return Object.entries(menu)
-    .map(([urlHash, { label, isAdminPage }]) => {
+    .map(([urlHash, { label, isAdminPage, showInMenu }]) => {
+      if (showInMenu === false) { return; }
       if (isAdminPage && isAdmin) {
-        return `<a href="#${urlHash}">${label}</a>`
+        return `<a href="#${urlHash}">${label}</a>`;
       } else if (!isAdminPage) {
-        return `<a href="#${urlHash}">${label}</a>`
+        return `<a href="#${urlHash}">${label}</a>`;
       }
     })
+    .filter(x => x) // remove empty entries
     .join(' | ');
 }
 
