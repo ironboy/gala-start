@@ -1,13 +1,18 @@
 import start from './pages/start.js';
 import jazzClub from './pages/jazz-club.js';
 import metalClub from './pages/metal-club.js';
+import createClub from './pages/create-club.js';
+
+const isAdmin = true; // "resultat av en inloggning"
 
 // Our menu: label to display in menu and 
 // function to run on menu choice
 const menu = {
+  // urlHash
   "start": { label: 'Start', function: start },
   "jazz-klubben": { label: 'Jazz-klubben', function: jazzClub },
-  "metal-klubben": { label: 'Metal-klubben', function: metalClub }
+  "metal-klubben": { label: 'Metal-klubben', function: metalClub },
+  "create-club": { label: 'Skapa en klubb', function: createClub, isAdminPage: true }
 };
 
 function createMenu() {
@@ -15,16 +20,20 @@ function createMenu() {
   // then map to create a-tags (links)
   // then join everything into one big string
   return Object.entries(menu)
-    .map(([urlHash, { label }]) => `
-      <a href="#${urlHash}">${label}</a>
-    `)
-    .join('');
+    .map(([urlHash, { label, isAdminPage }]) => {
+      if (isAdminPage && isAdmin) {
+        return `<a href="#${urlHash}">${label}</a>`
+      } else if (!isAdminPage) {
+        return `<a href="#${urlHash}">${label}</a>`
+      }
+    })
+    .join(' | ');
 }
 
 async function loadPageContent() {
   // if no hash redirect to #start
   if (location.hash === '') { location.replace('#start'); }
-  // add a class on body so that we can style differnt pages differently
+  // add a class on body so that we can style different pages differently
   document.body.setAttribute('class', location.hash.slice(1));
   // get the correct function to run depending on location.hash
   const functionToRun = menu[location.hash.slice(1)].function;
