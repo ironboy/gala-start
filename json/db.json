@@ -16,7 +16,19 @@
       "id": "232hgy",
       "name": "Benjamin",
       "email": "benjaminberglund@gmail.com",
-      "token": "U8ZqXhP"
+      "token": "U2dZyWL"
+    },
+    {
+      "id": "d4f5",
+      "name": "Bob",
+      "email": "bob@order.com",
+      "token": "lcTJuyA"
+    },
+    {
+      "id": "2a76",
+      "name": "Thomas",
+      "email": "thomas@nodehill.com",
+      "token": "c4a7vyW"
     }
   ],
   "bookings": [

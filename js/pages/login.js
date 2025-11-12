@@ -60,7 +60,7 @@ export async function checkStoredLogin() {
   }
   let customer = await (await fetch(`http://localhost:3002/customers/?email=${storedLogin.email}&token=${storedLogin.token}`)).json()
   customer = customer[0]
-  if (!(customer.email = storedLogin.email && customer.token == storedLogin.token)) {
+  if (!customer || !(customer.email = storedLogin.email && customer.token == storedLogin.token)) {
     // you are NOT logged in, clear session
     localStorage.customer = null
     return false
