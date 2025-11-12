@@ -13,13 +13,10 @@
   ],
   "customers": [
     {
-      "id": "123fgh",
-      "email": "ben@node.com"
-    },
-    {
       "id": "232hgy",
+      "name": "Benjamin",
       "email": "benjaminberglund@gmail.com",
-      "token": "Fiu3K62"
+      "token": "U8ZqXhP"
     }
   ],
   "bookings": [

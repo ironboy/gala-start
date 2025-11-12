@@ -3,11 +3,13 @@ import jazzClub from './pages/jazz-club.js';
 import metalClub from './pages/metal-club.js';
 import createClub from './pages/create-club.js';
 import clubCreated from './pages/club-created.js';
-import login from './pages/login.js';
+import { login, logout, checkStoredLogin } from './pages/login.js';
 
 window.baseUrl = 'http://localhost:3002/'
 
-const isAdmin = true; // "resultat av en inloggning"
+const user = checkStoredLogin();
+
+const isAdmin = user.isAdmin; // "resultat av en inloggning"
 
 // Our menu: label to display in menu and
 // function to run on menu choice
@@ -17,7 +19,7 @@ const menu = {
   "jazz-klubben": { label: 'Jazz-klubben', function: jazzClub },
   "metal-klubben": { label: 'Metal-klubben', function: metalClub },
   // "register": { label: 'Registrera dig', function: register },
-  "login": { label: 'Logga in', function: login },
+  "login": user? {label: 'Logout', function: logout } : { label: 'Logga in', function: login },
   "create-club": { label: 'Skapa en klubb', function: createClub, isAdminPage: true },
   "club-created": { label: 'Skapa en klubb', function: clubCreated, isAdminPage: true, showInMenu: false }
 };

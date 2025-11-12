@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx json-server -p 3002 json/db.json"
+    "start": "concurrently 'npx json-server -p 3002 json/db.json' 'node mail-service.js'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "concurrently": "^9.2.1",
     "express": "^5.1.0",
     "json-server": "^1.0.0-beta.3",
     "nodemailer": "^7.0.10"
