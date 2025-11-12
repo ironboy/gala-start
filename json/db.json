@@ -11,6 +11,28 @@
       "description": "Ylande metal som får dig att vilja erövra världen! Varje vecka med Tom som konferencier."
     }
   ],
+  "customers": [
+    {
+      "id": "123fgh",
+      "email": "ben@node.com"
+    },
+    {
+      "id": "232hgy",
+      "email": "benjaminberglund@gmail.com",
+      "token": "Fiu3K62"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "3453kfdwes",
+      "event": "43ac"
+    },
+    {
+      "id": "534456gdfsdfgdfg",
+      "customer": "123fgh",
+      "event": "43ac"
+    }
+  ],
   "events": [
     {
       "id": "43ac",

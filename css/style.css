@@ -4,8 +4,17 @@
 @import './pages/metal-club.css';
 @import './pages/create-club.css';
 
+:root {
+  --def-background: rgb(255, 0, 208);
+  --def-color: blue;
+  --site-font: Georgia, serif;
+}
+
+
 body {
-  margin: 20px
+  margin: 20px;
+  color: var(--def-color);
+  font-family: var(--site-font);
 }
 
 .pet {

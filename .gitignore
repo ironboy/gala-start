@@ -4,3 +4,6 @@ node_modules
 
 # Ingore stupid hidden MacOS file that has no use to us
 .DS_Store
+
+#Ignore secrets.json (no secrets on git)
+secrets.json

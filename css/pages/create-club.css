@@ -1,5 +1,7 @@
 body.create-club {
 
+  --site-font: Arial, sans-serif;
+
   input[type="text"],
   textarea {
     width: 100%;

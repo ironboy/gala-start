@@ -1,5 +1,5 @@
 body.start {
-  background-color: #eee;
+  background-color: var(--def-background);
   color: #222;
 
   a {

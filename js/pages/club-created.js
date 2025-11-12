@@ -1,6 +1,6 @@
 export default async function clubCreated() {
   // get all clubs
-  const allClubs = await (await fetch('http://localhost:3000/clubs')).json();
+  const allClubs = await (await fetch(window.baseUrl + 'clubs')).json();
   // show list of clubs
   return `
     <h1>Klubben skapades</h1>

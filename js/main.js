@@ -3,6 +3,9 @@ import jazzClub from './pages/jazz-club.js';
 import metalClub from './pages/metal-club.js';
 import createClub from './pages/create-club.js';
 import clubCreated from './pages/club-created.js';
+import login from './pages/login.js';
+
+window.baseUrl = 'http://localhost:3002/'
 
 const isAdmin = true; // "resultat av en inloggning"
 
@@ -13,6 +16,8 @@ const menu = {
   "start": { label: 'Start', function: start },
   "jazz-klubben": { label: 'Jazz-klubben', function: jazzClub },
   "metal-klubben": { label: 'Metal-klubben', function: metalClub },
+  // "register": { label: 'Registrera dig', function: register },
+  "login": { label: 'Logga in', function: login },
   "create-club": { label: 'Skapa en klubb', function: createClub, isAdminPage: true },
   "club-created": { label: 'Skapa en klubb', function: clubCreated, isAdminPage: true, showInMenu: false }
 };
@@ -35,12 +40,14 @@ function createMenu() {
 }
 
 async function loadPageContent() {
+  // remove # and anything after and including ? from the hash
+  const hash = location.hash.slice(1).split('?')[0]
   // if no hash redirect to #start
-  if (location.hash === '') { location.replace('#start'); }
+  if (hash === '') { location.replace('#start'); }
   // add a class on body so that we can style different pages differently
-  document.body.setAttribute('class', location.hash.slice(1));
+  document.body.setAttribute('class', hash);
   // get the correct function to run depending on location.hash
-  const functionToRun = menu[location.hash.slice(1)].function;
+  const functionToRun = menu[hash].function;
   // run the function and expect it return a html string
   const html = await functionToRun();
   // replace the contents of the main element
