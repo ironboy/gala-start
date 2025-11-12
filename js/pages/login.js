@@ -2,7 +2,7 @@ export async function login() {
   const searchParams = new URLSearchParams(location.href.split('?')[1]);
   if (searchParams.get('email') && searchParams.get('token')) {
     if (await validateToken(searchParams.get('email'), searchParams.get('token'))) {
-      return `<h2>You are logged in</h2>`
+      return `<h2>Logged in</h2>`
     } else {
       return `<h2>Invalid login</h2>`
     }
@@ -19,7 +19,8 @@ export async function login() {
 }
 
 export async function logout() {
-  // not implemented
+  delete (localStorage.customer)
+  checkStoredLogin()
   return ''
 }
 
@@ -62,9 +63,9 @@ export async function checkStoredLogin() {
   customer = customer[0]
   if (!customer || !(customer.email = storedLogin.email && customer.token == storedLogin.token)) {
     // you are NOT logged in, clear session
-    localStorage.customer = null
+    delete (localStorage.customer);
     return false
   } else {
-    return true
+    return localStorage.customer
   }
 }

@@ -10,8 +10,6 @@ window.baseUrl = 'http://localhost:3002/'
 
 const user = await checkStoredLogin();
 
-const isAdmin = user.isAdmin; // "resultat av en inloggning"
-
 // Our menu: label to display in menu and
 // function to run on menu choice
 const menu = {
@@ -20,19 +18,24 @@ const menu = {
   "jazz-klubben": { label: 'Jazz-klubben', function: jazzClub },
   "metal-klubben": { label: 'Metal-klubben', function: metalClub },
   "register": { label: 'Registrera dig', function: register },
-  "login": user.email ? { label: 'Logout', function: () => { } } : { label: 'Logga in', function: login },
+  "login": { label: 'Logga in', function: login },
   "create-club": { label: 'Skapa en klubb', function: createClub, isAdminPage: true },
   "club-created": { label: 'Skapa en klubb', function: clubCreated, isAdminPage: true, showInMenu: false }
+  // menu items can be manipulated later to reflect state changes later, see in createMenu function
 };
 
 function createMenu() {
+  // manipulate menu items when state changes
+  menu.login.label = (user ? 'Logga ut' : 'Logga in')
+  menu.login.function = (user ? logout : login)
+  console.info('creating the menu', user, menu)
   // Object.entries -> convert object to array
   // then map to create a-tags (links)
   // then join everything into one big string
-  return Object.entries(menu)
+  const menuHtml = Object.entries(menu)
     .map(([urlHash, { label, isAdminPage, showInMenu }]) => {
       if (showInMenu === false) { return; }
-      if (isAdminPage && isAdmin) {
+      if (isAdminPage && user && user.isAdmin) {
         return `<a href="#${urlHash}">${label}</a>`;
       } else if (!isAdminPage) {
         return `<a href="#${urlHash}">${label}</a>`;
@@ -40,7 +43,14 @@ function createMenu() {
     })
     .filter(x => x) // remove empty entries
     .join(' | ');
+  // set the menu html
+  document.querySelector('header nav').innerHTML = menuHtml
 }
+// call createMenu once on page load
+createMenu()
+// and then on every hash change of the url/location
+window.onhashchange = createMenu;
+
 
 async function loadPageContent() {
   // remove # and anything after and including ? from the hash
@@ -62,6 +72,3 @@ loadPageContent();
 
 // and then on every hash change of the url/location
 window.onhashchange = loadPageContent;
-
-// create the menu and display it
-document.querySelector('header nav').innerHTML = createMenu();
